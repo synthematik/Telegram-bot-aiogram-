@@ -131,7 +131,7 @@ def trans_word(words, lang):
             break
         except(AttributeError):
             print("Кажется, что вы неправильно ввели язык!")
-            print('если вы передумали напишите "стоп или Стоп"')
+            print('Если вы передумали, то напишите "стоп или Стоп"')
             lang = input("Попробуйте снова: ")
         if lang == 'Стоп' or lang == 'стоп':
             break

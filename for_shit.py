@@ -9,3 +9,9 @@
 
 #city = input("Введите название города: ")
 #print(get_weather(city))
+
+#keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    #buttons = ["Имя", "Город проживания"]
+    #keyboard.add(*buttons)
+
+#await message.answer(f"В каком городе ты живешь?", parse_mode='Markdown')

@@ -23,16 +23,15 @@ def get_weather(city):
         wind_speed = data["wind"]["speed"]
         sunrise = datetime.datetime.fromtimestamp(int(data["sys"]["sunrise"]))
         sunset = datetime.datetime.fromtimestamp(int(data["sys"]["sunset"]))
-        return f"Сегодня в городе {city} {weather_description}\nТемпература воздуха {temperature:.1f}°C," \
-               f"ощущается как {feels_temperature:.1f}°C. Максимальная температура {max_temperature:.1f}°C," \
-               f"минимальная температура {min_temperature:.1f}°C." \
-               f"\nДавление {pressure} мм ртутного столба, влажность {humidity}%." \
-               f"\nCкорость ветра {wind_speed:.2f} м/c." \
-               f"\nРассвет сегодня в {sunrise.strftime('%H:%M:%S')}." \
-               f"\nЗакат сегодня в {sunset.strftime('%H:%M:%S')}."
+        return f"Сегодня в городе {city} {weather_description}\nТемпература воздуха {temperature:.1f}°C, " \
+               f"ощущается как {feels_temperature:.1f}°C. Максимальная температура {max_temperature:.1f}°C, " \
+               f"минимальная температура {min_temperature:.1f}°C. " \
+               f"\nДавление {pressure} мм ртутного столба, влажность {humidity}%. " \
+               f"\nCкорость ветра {wind_speed:.2f} м/c. " \
+               f"\nРассвет сегодня в {sunrise.strftime('%H:%M:%S')}. " \
+               f"\nЗакат сегодня в {sunset.strftime('%H:%M:%S')}. "
 
     else:
         return "Не удалось получить данные о погоде."
-
 
 
