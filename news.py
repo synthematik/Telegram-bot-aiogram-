@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from lxml import html
 
+
 def get_link():
 # Адрес RIA Novosti
     ria_url = "https://ria.ru"
