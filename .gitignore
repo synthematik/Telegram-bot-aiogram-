@@ -3,4 +3,7 @@
 *.egg-info
 /.env
 /env
-
+/todo.py
+/todo
+todo.py
+/.cfg
