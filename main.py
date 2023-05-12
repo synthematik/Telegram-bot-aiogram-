@@ -83,7 +83,7 @@ async def report(message: types.Message, state: FSMContext):
     report = message.text  # report хранит cообщение, которе напишет пользователь
     await state.update_data(report_first=report)
     await message.answer("*Cпасибо за обратную связь!\nСообщение передано разработчикам*", parse_mode='Markdown')
-    await dp.bot.send_message(chat_id=439810664, text=f"*Сообщение от пользоватея!*\n{user.print()}\n\n*Сообщение:*\n{report}", parse_mode='Markdown')
+    await dp.bot.send_message(chat_id=config.chat_id.get_secret_value(), text=f"*Сообщение от пользоватея!*\n{user.print()}\n\n*Сообщение:*\n{report}", parse_mode='Markdown')
     await state.finish()
 
 
@@ -96,7 +96,7 @@ async def gnews(message: types.Message, state:FSMContext):
     links = get_link()
     str = ''
     for link in links:
-        if link not in user.links():
+        if link not in user.links:
             user.add_links(link)
             header = print_news_header(link)
             str += f"{header}\n{link}\n\n"
@@ -126,6 +126,23 @@ async def print_profile(message: types.Message, state: FSMContext):
         await message.answer("У тебя еще нет профиля.\nНажми *'Создать профиль'*, чтобы продолжить", parse_mode='Markdown')
         await state.set_state(None)
 
+
+# TODO
+@dp.message_handler(Text(equals=["Изменить имя"]))
+async def setN(message: types.Message):
+    await message.answer(f"_Функция пока недоступна, попробуй позже..._", parse_mode='Markdown')
+
+
+# TODO
+@dp.message_handler(Text(equals=["Изменить город"]))
+async def setC(message: types.Message):
+    await message.answer(f"_Функция пока недоступна, попробуй позже..._", parse_mode='Markdown')
+
+# TODO
+@dp.message_handler(Text(equals=["Заполнить профиль заново"]))
+async def newP(message: types.Message, state: FSMContext):
+    await message.answer(f"_Функция пока недоступна, попробуй позже..._", parse_mode='Markdown')
+    #await dp.current_state(chat=message.chat.id).set_state(None)
 
 async def main():
     await dp.start_polling()
