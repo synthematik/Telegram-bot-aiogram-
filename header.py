@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import openai
 from aiogram import Bot, executor, Dispatcher, types
 from aiogram.dispatcher.filters import Text, Command
 from aiogram.dispatcher import FSMContext

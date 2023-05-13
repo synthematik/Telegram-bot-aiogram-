@@ -5,6 +5,9 @@ logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(level
 
 dp = Dispatcher(bot=Bot(token=config.bot_token.get_secret_value()), storage=MemoryStorage())
 
+openai.api_key = config.gpt_token.get_secret_value()
+
+create_person()
 
 @dp.message_handler(commands="start")
 async def cmd_start(message: types.Message):
@@ -36,13 +39,9 @@ async def answer_city(message: types.Message, state: FSMContext):
     global answer_c
     answer_c = message.text
     user = User.get_chat(answer_n, answer_c, message.chat.id)# пользователь сохранен
-    links = message.text.split(",")
-    user = User.users[message.chat.id]
-    for link in links:
-        user.add_links(link.strip())
-    #create_json(user)
+    create_json(user)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    buttons = ["Новости", "Погода", "Переводчик"]
+    buttons = ["Новости", "Погода", "Переводчик", "Подобрать фильм"]
     keyboard.add(*buttons)
     await state.update_data(answer_two=answer_c)
     await message.answer("*Отлично!\nДанные сохранены*\n\nВыбери нужную функцию, чтобы продолжить",
@@ -86,7 +85,45 @@ async def report(message: types.Message, state: FSMContext):
     await dp.bot.send_message(chat_id=config.chat_id.get_secret_value(), text=f"*Сообщение от пользоватея!*\n{user.print()}\n\n*Сообщение:*\n{report}", parse_mode='Markdown')
     await state.finish()
 
+@dp.message_handler(Text(equals=["Подобрать фильм"]), state=None)
+async def qw(message: types.Message, state:FSMContext):
+    await state.finish()
+    keyboard = types.ReplyKeyboardRemove()
+    await message.answer(
+        "Ты можешь получить рекомендацию фильма, укажи свои предпочтения и я постараюсь подобрать для тебя идеальный вариант.\n" \
+        "Например, ты можешь запросить фильмы по жанру, рейтингу, актерам или любым другим параметрам, которые тебе интересны",
+        reply_markup=keyboard)
+    await Test.Movies.set()
 
+
+@dp.message_handler(state=Test.Movies)
+async def movies(message: types.Message, state: FSMContext):
+    answer_movies = message.text
+    await state.update_data(answer_first=answer_movies)
+    prompt = "Привет, мне нужна помощь, " + message.text + ", после 1980 года"
+    user = User.users.get(message.chat.id)
+    if user:
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=prompt,
+            temperature=0.5,
+            max_tokens=500,
+            top_p=1.0,
+            frequency_penalty=0.0,
+            presence_penalty=0.6,
+            stop=[" You: "]
+        )
+        if response['choices'][0]['text'].strip():  # проверяем, что ответ не пустой
+            await message.answer(response['choices'][0]['text'])
+        else:
+            await message.answer("Извини, я не могу помочь тебе на данный момент.")
+    else:
+        keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        buttons = ["Cоздать профиль"]
+        keyboard.add(*buttons)
+        await message.answer("У тебя еще нет профиля.\nНажми *'Создать профиль'*, чтобы продолжить",
+                             parse_mode='Markdown', reply_markup=keyboard)
+    await state.finish()
 
 @dp.message_handler(Text(equals=["Новости"]))
 async def gnews(message: types.Message, state:FSMContext):
@@ -119,7 +156,7 @@ async def print_profile(message: types.Message, state: FSMContext):
     user = User.users.get(message.chat.id)
     if user:
         keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        buttons = ["Новости", "Погода", "Переводчик"]
+        buttons = ["Новости", "Погода", "Переводчик", "Подобрать фильм"]
         keyboard.add(*buttons)
         await message.answer("Выбери нужную функцию, чтобы продолжить", reply_markup=keyboard)
     else:

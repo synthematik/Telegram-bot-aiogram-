@@ -46,6 +46,7 @@ class Test(StatesGroup):
     One = State()
     Two = State()
     News = State()
+    Movies = State()
     Weather = State()
     Translator = State()
     Profile = State()
@@ -56,24 +57,37 @@ class Test(StatesGroup):
 
 mass = []
 
+def check_is(chat_id):  # айди пользователя
+    f = open("persons.json", "r", encoding="utf-8")
+    try:
+        data = json.load(f)
+        f.close()
+        for temp in data:
+            if temp.get("chat_id") == chat_id:
+                return False
+        return True
+    except json.decoder.JSONDecodeError:
+        return True
+
 
 def create_json(user):
-    person_dict = {
-        "name": user.get_name(),
-        "city": user.get_city(),
-        "chat_id": user.get_chat_id(),
-        "links": user.get_links()
-    }
-    try:
-        with open("persons.json", "r", encoding="utf-8") as file:
-            data = json.load(file)
-    except json.decoder.JSONDecodeError:
-        data = []
-    data.append(person_dict)
-    with open("persons.json", "w", encoding="utf-8") as file:
-        json.dump(data, file, indent=4, ensure_ascii=False)
+    if check_is(user.chat_id):
+        person_dict = {
+            "name": user.get_name(),
+            "chat_id": user.get_chat_id(),
+            "city": user.get_city(),
+            "links": user.get_links()
+        }
+        try:
+            with open("persons.json", "r", encoding="utf-8") as file:
+                data = json.load(file)
+        except json.decoder.JSONDecodeError:
+            data = []
+        data.append(person_dict)
+        with open("persons.json", "w", encoding="utf-8") as file:
+            json.dump(data, file, indent=4)
 
-
+mass  = []
 def create_person():
     with open("persons.json", "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -85,11 +99,11 @@ def create_person():
             mass.append(a)
 
 
-#c = User("Kolya", "Piter", 252325235)
+c = User("Kolya", "Piter", 252325235)
 
-#create_json(c)
+create_json(c)
 
-#create_person()
+create_person()
 
-#for i in mass:
- #   print(i)
+for i in mass:
+    print(i.print())
