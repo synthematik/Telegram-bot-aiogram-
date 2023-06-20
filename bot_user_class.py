@@ -1,19 +1,20 @@
 from aiogram.dispatcher.filters.state import State, StatesGroup
 import json
 
-
 class User:
     users = {}
-    def __init__(self, name, city, chat_id):
+
+    def __init__(self, name, city, chat_id, task_list={}, links=[]):
         self.__name = name
         self.__city = city
         self.chat_id = chat_id
-        self.links = []
+        self.task_list = task_list
+        self.links = links
 
     @classmethod
     def get_chat(cls, name, city, chat_id):
         if chat_id not in cls.users:
-            cls.users[chat_id] = User(name, city, chat_id)
+            cls.users[chat_id] = User(name, city, chat_id, task_list={}, links=[])
         return cls.users[chat_id]
 
     def set_name(self, name):
@@ -37,73 +38,64 @@ class User:
     def get_chat_id(self):
         return self.chat_id
 
+    def get_task(self):
+        return self.task_list
+
+    def add_tasks(self, n):
+        dictionary = self.task_list
+        temp = len(dictionary)
+        self.task_list[temp + 1] = n
+        self.save_tasks()
+    def update_task(self, n):
+        if str(n) in self.task_list:
+            self.task_list[str(n)] = input("Введите новую задачу: ")
+            self.save_tasks()
+    def delete_task(self, n):
+        str_n = str(n)
+        if str_n in self.task_list:
+            value = self.task_list.pop(str_n)
+            for k in list(self.task_list.keys()):
+                if int(k) > n:
+                    self.task_list[str(int(k) - 1)] = self.task_list.pop(k)
+                    self.save_tasks()
+
+    def delete_all_task(self):
+        self.task_list.clear()
+        self.save_tasks()
+
+    def save_tasks(self):
+        user_data = {
+            "name": self.__name,
+            "city": self.__city,
+            "chat_id": self.chat_id,
+            "task_list": self.task_list,
+            "links": self.links
+        }
+        with open("persons.json", "r",encoding="utf-8") as file:
+            data = json.load(file)
+
+        for i, person in enumerate(data):
+            if person["chat_id"] == self.chat_id:
+                data[i] = user_data
+                break
+        else:
+            data.append(user_data)
+
+        with open("persons.json", "w",encoding="utf-8") as file:
+            json.dump(data, file, indent=4)
+
     def print(self):
-        return (f"Имя: {self.__name}\n" \
-                f"Город: {self.__city}")
+        return (f"Имя: {self.__name}\n"
+              f"Город: {self.__city}\n"
+              f"Список дел: {self.task_list}\n")
 
 
 class Test(StatesGroup):
     One = State()
     Two = State()
-    News = State()
+    Tree = State()
+    Task = State()
     Movies = State()
-    Weather = State()
-    Translator = State()
-    Profile = State()
     report1 = State()
-    report2 = State()
 
 
-
-mass = []
-
-def check_is(chat_id):  # айди пользователя
-    f = open("persons.json", "r", encoding="utf-8")
-    try:
-        data = json.load(f)
-        f.close()
-        for temp in data:
-            if temp.get("chat_id") == chat_id:
-                return False
-        return True
-    except json.decoder.JSONDecodeError:
-        return True
-
-
-def create_json(user):
-    if check_is(user.chat_id):
-        person_dict = {
-            "name": user.get_name(),
-            "chat_id": user.get_chat_id(),
-            "city": user.get_city(),
-            "links": user.get_links()
-        }
-        try:
-            with open("persons.json", "r", encoding="utf-8") as file:
-                data = json.load(file)
-        except json.decoder.JSONDecodeError:
-            data = []
-        data.append(person_dict)
-        with open("persons.json", "w", encoding="utf-8") as file:
-            json.dump(data, file, indent=4)
-
-mass  = []
-def create_person():
-    with open("persons.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
-        for i in data:
-            a = User(i.get("name"), i.get("city"), i.get("chat_id"))
-            b = i.get("links")
-            for j in b:
-                a.add_links(j)
-            mass.append(a)
-
-
-c = User("Kolya", "Piter", 252325235)
-
-create_json(c)
-
-create_person()
-
-for i in mass:
-    print(i.print())

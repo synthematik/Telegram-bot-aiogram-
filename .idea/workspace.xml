@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4e519e1-d117-4b59-b82d-e1a3ba703e64" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/json_function.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/app.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot_user_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_user_class.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/header.py" beforeDir="false" afterPath="$PROJECT_DIR$/header.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/persons.json" beforeDir="false" afterPath="$PROJECT_DIR$/persons.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/news.py" beforeDir="false" afterPath="$PROJECT_DIR$/news.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,15 +30,21 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app.log" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/bot_user_class.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/google_trans.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/header.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/main.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/news.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/not_need.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/persons.json" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/weather.py" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2ObpZ4qk0XAG1KYqUDO0RhRlrPu" />
   <component name="ProjectViewState">
@@ -53,10 +61,39 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AideX" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -96,6 +133,28 @@
       <workItem from="1683961932492" duration="2775000" />
       <workItem from="1683970597686" duration="5634000" />
       <workItem from="1683977468954" duration="15000" />
+      <workItem from="1683990892546" duration="7838000" />
+      <workItem from="1684087110324" duration="5464000" />
+      <workItem from="1684168361010" duration="1722000" />
+      <workItem from="1684232845508" duration="758000" />
+      <workItem from="1684346493071" duration="310000" />
+      <workItem from="1684346825993" duration="474000" />
+      <workItem from="1684389326288" duration="1349000" />
+      <workItem from="1684391363727" duration="72000" />
+      <workItem from="1684512758943" duration="1644000" />
+      <workItem from="1684517735981" duration="648000" />
+      <workItem from="1684565959330" duration="1899000" />
+      <workItem from="1684611291153" duration="2137000" />
+      <workItem from="1684782078002" duration="8000" />
+      <workItem from="1684782115950" duration="89000" />
+      <workItem from="1684782237592" duration="416000" />
+      <workItem from="1684841787188" duration="459000" />
+      <workItem from="1685902819569" duration="276000" />
+      <workItem from="1686058385134" duration="2492000" />
+      <workItem from="1686071188460" duration="3923000" />
+      <workItem from="1686849721492" duration="1828000" />
+      <workItem from="1686852499548" duration="3973000" />
+      <workItem from="1687285123989" duration="3836000" />
     </task>
     <servers />
   </component>
@@ -131,10 +190,10 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/AideX$main.coverage" NAME="main Coverage Results" MODIFIED="1683975500667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AideX$main.coverage" NAME="main Coverage Results" MODIFIED="1687289514896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AideX$news.coverage" NAME="news Coverage Results" MODIFIED="1682339962083" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AideX$weather.coverage" NAME="weather Coverage Results" MODIFIED="1682574265608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AideX$tesr.coverage" NAME="tesr Coverage Results" MODIFIED="1682265815297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/AideX$bot_user_class.coverage" NAME="bot_user_class Coverage Results" MODIFIED="1683973010624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AideX$bot_user_class.coverage" NAME="bot_user_class Coverage Results" MODIFIED="1684841855283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

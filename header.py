@@ -9,3 +9,4 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from news import *
 from weather import *
 from bot_user_class import *
+from json_function import *
