@@ -1,6 +1,6 @@
 aiogram - WARNING - Updates were skipped successfully.
 asyncio - ERROR - Task exception was never retrieved
-future: <Task finished name='Task-12' coro=<Dispatcher._process_polling_updates() done, defined at D:\pythonProject\AideX\Lib\site-packages\aiogram\dispatcher\dispatcher.py:407> exception=NameError("name 'answer_n' is not defined")>
+future: <Task finished name='Task-231' coro=<Dispatcher._process_polling_updates() done, defined at D:\pythonProject\AideX\Lib\site-packages\aiogram\dispatcher\dispatcher.py:407> exception=RateLimitError(message='You exceeded your current quota, please check your plan and billing details.', http_status=429, request_id=None)>
 Traceback (most recent call last):
   File "D:\pythonProject\AideX\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 415, in _process_polling_updates
     for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
@@ -17,7 +17,21 @@ Traceback (most recent call last):
   File "D:\pythonProject\AideX\Lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
     response = await handler_obj.handler(*args, **partial_data)
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\pythonProject\AideX\main.py", line 53, in answer_city
-    user = User.get_chat(answer_n, answer_c, message.chat.id)# пользователь сохранен
-                         ^^^^^^^^
-NameError: name 'answer_n' is not defined
+  File "D:\pythonProject\AideX\main.py", line 138, in movies
+    response = openai.ChatCompletion.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pythonProject\AideX\Lib\site-packages\openai\api_resources\chat_completion.py", line 25, in create
+    return super().create(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pythonProject\AideX\Lib\site-packages\openai\api_resources\abstract\engine_api_resource.py", line 153, in create
+    response, _, api_key = requestor.request(
+                           ^^^^^^^^^^^^^^^^^^
+  File "D:\pythonProject\AideX\Lib\site-packages\openai\api_requestor.py", line 230, in request
+    resp, got_stream = self._interpret_response(result, stream)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pythonProject\AideX\Lib\site-packages\openai\api_requestor.py", line 624, in _interpret_response
+    self._interpret_response_line(
+  File "D:\pythonProject\AideX\Lib\site-packages\openai\api_requestor.py", line 687, in _interpret_response_line
+    raise self.handle_error_response(
+openai.error.RateLimitError: You exceeded your current quota, please check your plan and billing details.
+aiogram - WARNING - Goodbye!

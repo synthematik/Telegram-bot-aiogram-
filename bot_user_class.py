@@ -42,8 +42,9 @@ class User:
         return self.task_list
 
     def add_tasks(self, n):
-        dictionary = self.task_list
-        temp = len(dictionary)
+        if self.task_list is None:
+            self.task_list = {}
+        temp = len(self.task_list)
         self.task_list[temp + 1] = n
         self.save_tasks()
     def update_task(self, n):
@@ -84,18 +85,18 @@ class User:
         with open("persons.json", "w",encoding="utf-8") as file:
             json.dump(data, file, indent=4)
 
-    def print(self):
-        return (f"Имя: {self.__name}\n"
-              f"Город: {self.__city}\n"
-              f"Список дел: {self.task_list}\n")
-
+    def print(self, tasks):
+        tasks_formatted = "\n".join([f"• {task}" for task in tasks])
+        message_text = f"*Имя:* {self.__name}\n" \
+                       f"*Город:* {self.__city}\n" \
+                       f"*Список дел:*\n{tasks_formatted}"
+        return message_text
 
 class Test(StatesGroup):
     One = State()
     Two = State()
     Tree = State()
     Task = State()
-    Movies = State()
+    StartChat = State()
+    EndChat = State()
     report1 = State()
-
-

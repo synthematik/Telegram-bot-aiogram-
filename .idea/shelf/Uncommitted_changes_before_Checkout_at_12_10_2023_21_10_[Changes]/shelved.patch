@@ -1,0 +1,50 @@
+Index: json_function.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import json\r\nfrom bot_user_class import *\r\ndef check_is(chat_id):  # айди пользователя\r\n    f = open(\"persons.json\", \"r\", encoding=\"utf-8\")\r\n    try:\r\n        data = json.load(f)\r\n        f.close()\r\n        for temp in data:\r\n            if temp.get(\"chat_id\") == chat_id:\r\n                return False\r\n        return True\r\n    except json.decoder.JSONDecodeError:\r\n        return True\r\n\r\n\r\ndef create_json(user):\r\n    if check_is(user.chat_id):\r\n        person_dict = {\r\n            \"name\": user.get_name(),\r\n            \"chat_id\": user.get_chat_id(),\r\n            \"city\": user.get_city(),\r\n            \"tasks\": user.get_task(),\r\n            \"links\": user.get_links()\r\n\r\n        }\r\n        try:\r\n            with open(\"persons.json\", \"r\", encoding=\"utf-8\") as file:\r\n                data = json.load(file)\r\n        except json.decoder.JSONDecodeError:\r\n            data = []\r\n        data.append(person_dict)\r\n        with open(\"persons.json\", \"w\", encoding=\"utf-8\") as file:\r\n            json.dump(data, file, indent=4)\r\n\r\n\r\nmass = []\r\n\r\n\r\ndef create_person_from_json():\r\n    with open(\"persons.json\", \"r\", encoding=\"utf-8\") as f:\r\n        data = json.load(f)\r\n        for i in data:\r\n            a = User(i.get(\"name\"), i.get(\"city\"), i.get(\"chat_id\"), i.get(\"tasks\"), i.get(\"links\"))\r\n            mass.append(a)\r\n\r\n\r\ndef get_user_by_chat_id(chat_id):\r\n    for user in mass:\r\n        if user.chat_id == chat_id:\r\n            return user\r\n    return None
+===================================================================
+diff --git a/json_function.py b/json_function.py
+--- a/json_function.py	
++++ b/json_function.py	
+@@ -40,7 +40,7 @@
+     with open("persons.json", "r", encoding="utf-8") as f:
+         data = json.load(f)
+         for i in data:
+-            a = User(i.get("name"), i.get("city"), i.get("chat_id"), i.get("tasks"), i.get("links"))
++            a = User(i.get("name"), i.get("city"), i.get("chat_id"), i.get("task_list"), i.get("links"))
+             mass.append(a)
+ 
+ 
+Index: app.log
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>aiogram - WARNING - Updates were skipped successfully.\r\nasyncio - ERROR - Task exception was never retrieved\r\nfuture: <Task finished name='Task-12' coro=<Dispatcher._process_polling_updates() done, defined at D:\\pythonProject\\AideX\\Lib\\site-packages\\aiogram\\dispatcher\\dispatcher.py:407> exception=NameError(\"name 'answer_n' is not defined\")>\r\nTraceback (most recent call last):\r\n  File \"D:\\pythonProject\\AideX\\Lib\\site-packages\\aiogram\\dispatcher\\dispatcher.py\", line 415, in _process_polling_updates\r\n    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):\r\n                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"D:\\pythonProject\\AideX\\Lib\\site-packages\\aiogram\\dispatcher\\dispatcher.py\", line 235, in process_updates\r\n    return await asyncio.gather(*tasks)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"D:\\pythonProject\\AideX\\Lib\\site-packages\\aiogram\\dispatcher\\handler.py\", line 117, in notify\r\n    response = await handler_obj.handler(*args, **partial_data)\r\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"D:\\pythonProject\\AideX\\Lib\\site-packages\\aiogram\\dispatcher\\dispatcher.py\", line 256, in process_update\r\n    return await self.message_handlers.notify(update.message)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"D:\\pythonProject\\AideX\\Lib\\site-packages\\aiogram\\dispatcher\\handler.py\", line 117, in notify\r\n    response = await handler_obj.handler(*args, **partial_data)\r\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"D:\\pythonProject\\AideX\\main.py\", line 53, in answer_city\r\n    user = User.get_chat(answer_n, answer_c, message.chat.id)# ������������ ��������\r\n                         ^^^^^^^^\r\nNameError: name 'answer_n' is not defined\r\n
+===================================================================
+diff --git a/app.log b/app.log
+--- a/app.log	
++++ b/app.log	
+@@ -1,23 +1,2 @@
+ aiogram - WARNING - Updates were skipped successfully.
+-asyncio - ERROR - Task exception was never retrieved
+-future: <Task finished name='Task-12' coro=<Dispatcher._process_polling_updates() done, defined at D:\pythonProject\AideX\Lib\site-packages\aiogram\dispatcher\dispatcher.py:407> exception=NameError("name 'answer_n' is not defined")>
+-Traceback (most recent call last):
+-  File "D:\pythonProject\AideX\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 415, in _process_polling_updates
+-    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+-                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "D:\pythonProject\AideX\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 235, in process_updates
+-    return await asyncio.gather(*tasks)
+-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "D:\pythonProject\AideX\Lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+-    response = await handler_obj.handler(*args, **partial_data)
+-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "D:\pythonProject\AideX\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 256, in process_update
+-    return await self.message_handlers.notify(update.message)
+-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "D:\pythonProject\AideX\Lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+-    response = await handler_obj.handler(*args, **partial_data)
+-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "D:\pythonProject\AideX\main.py", line 53, in answer_city
+-    user = User.get_chat(answer_n, answer_c, message.chat.id)# ������������ ��������
+-                         ^^^^^^^^
+-NameError: name 'answer_n' is not defined
++aiogram - WARNING - Goodbye!
