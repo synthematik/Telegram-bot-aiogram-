@@ -3,4 +3,8 @@
 *.egg-info
 /.env
 /env
-
+/not_need.py
+not_need.py
+/.cfg
+/persons.json
+/google_trans.py
