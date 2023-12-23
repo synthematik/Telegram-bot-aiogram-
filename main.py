@@ -5,8 +5,6 @@ logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(level
 
 dp = Dispatcher(bot=Bot(token=config.bot_token.get_secret_value()), storage=MemoryStorage())
 
-openai.api_key = config.gpt_token.get_secret_value()
-
 create_person_from_json()
 
 #region start
@@ -135,7 +133,7 @@ async def movies(message: types.Message, state: FSMContext):
     buttons = ["Завершить чат"]
     keyboard.add(*buttons)
     if user:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=messages
         )
@@ -274,10 +272,6 @@ async def menu(message: types.Message, state: FSMContext):
         await profile_name(message, state)
         await state.finish()
 #endregion
-
-async def main():
-    await dp.start_polling()
-
 
 if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
