@@ -8,3 +8,7 @@ not_need.py
 /.cfg
 /persons.json
 /google_trans.py
+Lib
+Scripts
+.idea
+app.log
